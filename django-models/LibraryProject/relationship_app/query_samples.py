@@ -1,32 +1,17 @@
-"""
-Sample queries (Task 0).
-Run from Django shell (python manage.py shell) or import and call functions.
-"""
+from .models import Author, Book, Library, Librarian
 
-from .models import Author, Book, Library
-
+# Query all books by a specific author
 def books_by_author(author_name):
-    """Return a queryset of books written by author_name."""
-        try:
-                author = Author.objects.get(name=author_name)
-                        return Book.objects.filter(author=author)
-                            except Author.DoesNotExist:
-                                    return Book.objects.none()
+    author = Author.objects.get(name=author_name)
+        return Book.objects.filter(author=author)
 
-                                    def books_in_library(library_name):
-                                        """Return a queryset of books in the named library."""
-                                            try:
-                                                    lib = Library.objects.get(name=library_name)
-                                                            return lib.books.all()
-                                                                except Library.DoesNotExist:
-                                                                        return Book.objects.none()
+        # List all books in a library
+        def books_in_library(library_name):
+            library = Library.objects.get(name=library_name)
+                return library.books.all()
 
-                                                                        def librarian_of_library(library_name):
-                                                                            """Return the Librarian instance for a library, or None."""
-                                                                                from .models import Librarian
-                                                                                    try:
-                                                                                            lib = Library.objects.get(name=library_name)
-                                                                                                    return getattr(lib, 'librarian', None)
-                                                                                                        except Library.DoesNotExist:
-                                                                                                                return None
-                                                                                                                
+                # Retrieve the librarian for a library
+                def librarian_for_library(library_name):
+                    library = Library.objects.get(name=library_name)
+                        return Librarian.objects.get(library=library)
+                        
