@@ -13,7 +13,65 @@ def list_books(request):
     books = Book.objects.all()
         return render(request, "relationship_app/list_books.html", {"books": books})
 
-     
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.views.generic import DetailView
+from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
+from django.contrib.auth.forms import UserCreationForm
+from .models import Book, Library
+
+# Function-based view: List all books
+def list_books(request):
+    books = Book.objects.all()
+        return render(request, "relationship_app/list_books.html", {"books": books})
+
+        # Class-based view: Library details
+        class LibraryDetailView(DetailView):
+            model = Library
+                template_name = "relationship_app/library_detail.html"
+                    context_object_name = "library"
+
+                    # ----------------------------
+                    # User Registration View
+                    # ----------------------------
+                    def register(request):
+                        if request.method == "POST":
+                                form = UserCreationForm(request.POST)
+                                        if form.is_valid():
+                                                    form.save()
+                                                                return redirect("login")  # redirect to login page after successful registration
+                                                                    else:
+                                                                            form = UserCreationForm()
+                                                                                return render(request, "relationship_app/register.html", {"form": form})
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.views.generic import DetailView
+from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
+from django.contrib.auth.forms import UserCreationForm
+from .models import Book, Library
+
+# Function-based view: List all books
+def list_books(request):
+    books = Book.objects.all()
+        return render(request, "relationship_app/list_books.html", {"books": books})
+
+        # Class-based view: Library details
+        class LibraryDetailView(DetailView):
+            model = Library
+                template_name = "relationship_app/library_detail.html"
+                    context_object_name = "library"
+
+                   
+                    def register(request):
+                        if request.method == "POST":
+                                form = UserCreationForm(request.POST)
+                                        if form.is_valid():
+                                                    form.save()
+                                                                return redirect("login")  # redirect to login page after successful registration
+                                                                    else:
+                                                                            form = UserCreationForm()
+                                                                                return render(request, "relationship_app/register.html", {"form": form})
+                                                                                
 
         # Class-based view: Library details
         class LibraryDetailView(DetailView):
