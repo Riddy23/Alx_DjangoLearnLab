@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
-from .models import Book, Library
+from .models import Book
+from .models import Library 
 
 # Function-based view: List all books
 def list_books(request):
@@ -43,4 +44,3 @@ def list_books(request):
                                             @permission_required("relationship_app.can_delete_book")
                                             def delete_book(request):
                                                 return HttpResponse("You can delete a book.")
-                                                
