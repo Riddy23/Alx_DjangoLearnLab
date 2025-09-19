@@ -3,6 +3,14 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser, Book
 
 
+
+class ExampleForm(forms.Form):
+        name = forms.CharField(max_length=100, label="Your Name")
+            email = forms.EmailField(label="Email Address")
+                message = forms.CharField(widget=forms.Textarea, label="Message")
+
+
+                # Forms for CustomUser
 # Forms for CustomUser
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -28,4 +36,3 @@ class CustomUserCreationForm(UserCreationForm):
                                                                                                     "author": forms.TextInput(attrs={"placeholder": "Enter author name"}),
                                                                                                                 "published_date": forms.DateInput(attrs={"type": "date"}),
                                                                                                                         }
-                                                                                                                        
