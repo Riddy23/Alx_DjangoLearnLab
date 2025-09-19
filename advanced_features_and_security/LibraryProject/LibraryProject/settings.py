@@ -47,6 +47,10 @@ X_FRAME_OPTIONS = "DENY"  # Protect against clickjacking
 SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent MIME type sniffing
 SECURE_BROWSER_XSS_FILTER = True
 
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+
 ALLOWED_HOSTS = ["yourdomain.com", "www.yourdomain.com"]
 
 ALLOWED_HOSTS = []
