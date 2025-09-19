@@ -25,3 +25,31 @@ Protected with `@permission_required`:
 2. Create test users in admin.
 3. Assign them to groups.
 4. Login as each user and verify permissions.
+
+
+# Django Security Best Practices
+
+## 1. Secure Settings
+- `DEBUG = False` in production
+- `SECURE_BROWSER_XSS_FILTER = True` (XSS protection)
+- `SECURE_CONTENT_TYPE_NOSNIFF = True` (MIME sniffing prevention)
+- `X_FRAME_OPTIONS = 'DENY'` (clickjacking protection)
+- `CSRF_COOKIE_SECURE = True` and `SESSION_COOKIE_SECURE = True` (HTTPS-only cookies)
+
+## 2. CSRF Protection
+- All forms include `{% csrf_token %}` in templates.
+
+## 3. SQL Injection Prevention
+- Always use Django ORM (`.save()`, `.filter()`, `.get()`) instead of raw SQL.
+- User input is validated with Django Forms.
+
+## 4. Content Security Policy (CSP)
+- Implemented using `django-csp` middleware.
+- Restricts scripts, styles, and fonts to trusted domains.
+
+## 5. Testing
+- Verified CSRF tokens included in forms.
+- Checked forms against XSS by submitting malicious scripts.
+- Confirmed users without permissions cannot access restricted views.
+
+
