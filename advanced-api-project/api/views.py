@@ -29,6 +29,7 @@ class BookListView(generics.ListAPIView):
     search_fields = ["title", "author", "description"]  # example searchable fields
     ordering_fields = ["title", "author", "published_date"]
     ordering_fields = ["title", "author", "published_date"]  # example fields
+    filterset_fields = ["author", "publication_year"]
     
 
 
