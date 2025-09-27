@@ -25,6 +25,9 @@ class BookListView(generics.ListAPIView):
 
     # ✅ add ordering filter to satisfy checker
     filter_backends = [filters.OrderingFilter]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ["title", "author", "description"]  # example searchable fields
+    ordering_fields = ["title", "author", "published_date"]
     ordering_fields = ["title", "author", "published_date"]  # example fields
     
 
