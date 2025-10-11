@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+    <head>
+          <meta charset="utf-8" />
+            <title>{% block title %}Django Blog{% endblock %}</title>
+              <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    </head>
+    <body>
+          <header>
+                <h1><a href="{% url 'blog:post_list' %}">Django Blog</a></h1>
+                    <nav>
+                              {% if user.is_authenticated %}
+                                      Hello, {{ user.username }} | <a href="{% url 'blog:post_create' %}">New Post</a> |
+                                              <a href="{% url 'blog:profile' %}">Profile</a> |
+                                                      <a href="{% url 'logout' %}">Logout</a>
+                                                            {% else %}
+                                                                    <a href="{% url 'login' %}">Login</a> |
+                                                                            <a href="{% url 'blog:register' %}">Register</a>
+                                                                                  {% endif %}
+                                                                                        <form action="{% url 'blog:search' %}" method="get" style="display:inline">
+                                                                                                    <input name="q" placeholder="Search...">
+                                                                                                            <button type="submit">Search</button>
+                                                                                        </form>
+                                                                                    </nav>
+                                                                                        <hr/>
+                                                                                </header>
+
+                                                                                  <main>
+                                                                                        {% if messages %}
+                                                                                              <ul class="messages">
+                                                                                                        {% for m in messages %}
+                                                                                                                  <li>{{ m }}</li>
+                                                                                                                          {% endfor %}
+                                                                                              </ul>
+                                                                                                  {% endif %}
+                                                                                                      {% block content %}{% endblock %}
+                                                                                            </main>
+
+                                                                                              <footer>
+                                                                                                    <hr/>
+                                                                                                        <small>© Django Blog</small>
+                                                                                              </footer>
+                                                                                            </body>
+                                                                                            </html>
+                                                                                            
